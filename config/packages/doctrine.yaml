@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'mysql://orbys:Mina1707.@127.0.0.1:3306/orbys_db?serverVersion=8.0.32&charset=utf8mb4'
+        url: 'mysql://usuario:contraseña@127.0.0.1:3306/orbys_db?serverVersion=8.0.32&charset=utf8mb4'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
