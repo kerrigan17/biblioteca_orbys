@@ -20,9 +20,9 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Book[] 
+     * @return Book[] Returns an array of Book objects
      */
-    public function findByCategory(string $category)
+    public function findByCategory(string $category): array
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.category = :val')
@@ -33,29 +33,14 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Book[] 
+     * @return Book[] Returns an array of Book objects published before a certain year
      */
-    public function findPublishedBefore(int $year)
+    public function findPublishedBefore(int $year): array
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.publicationYear < :year')
             ->setParameter('year', $year)
             ->orderBy('b.publicationYear', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * Find books with a search term in title or ISBN
-     *
-     * @param string $searchTerm
-     * @return Book[]
-     */
-    public function searchBooks($searchTerm)
-    {
-        return $this->createQueryBuilder('b')
-            ->where('b.title LIKE :term OR b.isbn LIKE :term')
-            ->setParameter('term', '%' . $searchTerm . '%')
             ->getQuery()
             ->getResult();
     }

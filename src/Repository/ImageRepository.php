@@ -20,13 +20,14 @@ class ImageRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Image[] Returns an array of Image objects associated with a specific book ID
+     * @return Image[] Returns an array of Image objects linked to a book
      */
-    public function findByBookId(int $bookId)
+    public function findByBookId(int $bookId): array
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.book = :bookId')
-            ->setParameter('bookId', $bookId)
+            ->andWhere('i.book = :val')
+            ->setParameter('val', $bookId)
+            ->orderBy('i.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
