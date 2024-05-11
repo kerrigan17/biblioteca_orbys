@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import './Books.css'; 
 
 function Books() {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        fetch('/books') // No necesitas especificar el puerto gracias al proxy
+        fetch('/books')
             .then(response => response.json())
-            .then(data => setBooks(data.data));
+            .then(data => setBooks(data.data))
+            .catch(error => console.error('Error fetching data:', error));
     }, []);
 
     return (
-        <div>
-            <h1>List of Books</h1>
-            <ul>
+        <div className="books-container">
+            <h1>Libros Disponibles</h1>
+            <div className="book-list">
                 {books.map(book => (
-                    <li key={book.id}>
-                        {book.title} - {book.category}
-                    </li>
+                    <div key={book.id} className="book-item">
+                        <h2>{book.title}</h2>
+                        <p>ISBN: {book.isbn}</p>
+                        <p>Año de Publicación: {book.publicationYear}</p>
+                        <p>Categoría: {book.category}</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }

@@ -32,6 +32,7 @@ class ImportBooksCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $io->success('Starting to process the command.');
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {
@@ -42,7 +43,8 @@ class ImportBooksCommand extends Command
             // ...
         }
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Command processed successfully.');
+        return Command::SUCCESS;
 
         return Command::SUCCESS;
     }
